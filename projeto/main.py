@@ -1,4 +1,4 @@
-from utils.video_utils import EdicaoVideo
+from utils.edicao_video_utils import EdicaoVideo
 import os
 
 if __name__ == '__main__':
