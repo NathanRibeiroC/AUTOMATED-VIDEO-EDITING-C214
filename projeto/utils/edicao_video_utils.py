@@ -2,6 +2,7 @@
 from moviepy.editor import *
 # arraynp
 import numpy as np
+from numpy.core.records import array
 # arquivo .wav
 from scipy.io import wavfile
 # plot
@@ -15,12 +16,24 @@ from itertools import groupby, count
 #notificações
 from .logging_utils import logConfig
 
+# adicionar package ao sys.path
+import sys
+from pathlib import Path 
+file = Path(__file__).resolve()
+parent, root = file.parent, file.parents[1]
+sys.path.append(str(root))
+
+# Additionally remove the current file's directory from sys.path
+try:
+    sys.path.remove(str(parent))
+except ValueError: # Already removed
+    pass
+
 class EdicaoVideo:
 
-    def __init__(self, videoPath):     
+    def __init__(self, videoPath, resourcesPath):     
         """Características principais do arquivo de vídeo""" 
-        dirname=os.path.dirname #pega diretório atual
-        self.resourcesPath = os.path.join(dirname(dirname(__file__)))+'\\resources\\'    # parent do diretório atual + folder recources
+        self.resourcesPath = resourcesPath
         self.path = videoPath # caminho do vídeo
         self.clip = VideoFileClip(self.path) # array que representa vídeo
 
@@ -34,6 +47,7 @@ class EdicaoVideo:
         #normalização
         #divide por 2^15 que geralmente é a resolução de cada bit por amostra
         self.data_wav_norm = data_wav / (2**15)
+        return self.data_wav_norm
     
     def size_segmentation(self):
         """Segmentação de tamanho fixo do áudio"""
@@ -112,7 +126,7 @@ class EdicaoVideo:
             final.write_videofile(self.resourcesPath+"corte_{0}.mp4".format(contA))
             clip_base = 0 # desalocar memória do processo, p/ conseguir excluir o arquivo de corte
             os.remove(self.resourcesPath+"corte_{0}.mp4".format(contA-1))
-            os.remove(self.resourcesPath+"edicao.wav")
+        os.remove(self.resourcesPath+"edicao.wav")
 
 
 
