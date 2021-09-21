@@ -13,9 +13,8 @@ import os
 from operator import itemgetter
 #identificação de subsequencias
 from itertools import groupby, count
-#notificações
-from .logging_utils import logConfig
-
+# pega data
+from datetime import datetime
 # adicionar package ao sys.path
 import sys
 from pathlib import Path 
@@ -43,12 +42,12 @@ class EdicaoVideo:
         # extração do áudio do vídeo
         self.clip.audio.write_audiofile(self.resourcesPath+"edicao.wav",codec='pcm_s16le') #codec = codifica áudio em .wav 16bits
         # extraindo array de áudio
-        self.fs_wav, data_wav = wavfile.read(self.resourcesPath+"edicao.wav")  #.wav ~= 44kHz, 'sample frequency' e 'sample data'
+        self.fs_wav, self.data_wav = wavfile.read(self.resourcesPath+"edicao.wav")  #.wav ~= 44kHz, 'sample frequency' e 'sample data'
         #normalização
         #divide por 2^15 que geralmente é a resolução de cada bit por amostra
-        self.data_wav_norm = data_wav / (2**15)
+        self.data_wav_norm = self.data_wav / (2**15)
         return self.data_wav_norm
-    
+
     def size_segmentation(self):
         """Segmentação de tamanho fixo do áudio"""
         self.extract_audio_features()
@@ -58,23 +57,24 @@ class EdicaoVideo:
         #quebrando o sinal em 56 páginas de 2 colunas(sinal stereo) e com 48000linhas (amostras)
         self.segments = np.array([self.data_wav_norm[x:x + segment_size] for x in
                      np.arange(0, signal_len, segment_size)])
+        return self.segments
 
     def calculo_energia_media(self):
         """Cálculo da energia média dos segmentos do áudio"""
         self.size_segmentation()
-        energies = [(s**2).sum() / len(s) for s in self.segments]
+        self.energies = [(s**2).sum() / len(s) for s in self.segments]
         # sem normalização haveria integer overflow aqui
-        thres = 2.1 * np.median(energies)
-        index_of_segments_to_keep = (np.where(energies > thres)[0])
+        thres = 2.1 * np.median(self.energies)
+        index_of_segments_to_keep = (np.where(self.energies > thres)[0])
         self.aux = index_of_segments_to_keep
         #segmentos com energia maior do que o limiar
         segments2 = self.segments[self.aux]
         #concatena segmentos dos sinais divididos, com valor de energia > limiar
         self.new_signal = np.concatenate(segments2)
         #vetores para plot (SE NECESSÁRIO NO FUTURO)
-        x = [s for s in range(len(energies))]
-        y = np.ones(len(energies)) * thres
-    
+        x = [s for s in range(len(self.energies))]
+        y = np.ones(len(self.energies)) * thres
+
     def subseq_max(self):
         """Código base de como identificar maior subsequência consecutiva de inteiros positivos dentro de array"""
         self.calculo_energia_media()
@@ -128,6 +128,24 @@ class EdicaoVideo:
             os.remove(self.resourcesPath+"corte_{0}.mp4".format(contA-1))
         os.remove(self.resourcesPath+"edicao.wav")
 
+class EdVideoMetaData():
+    def __init__(self) -> None:
+        self.hour = 0
+        self.date = 0
+
+    def getTime(self):
+        time = datetime.now().time()
+        self.hour = time
+        return time
+
+    def getDate(self):
+        date = datetime.now().date()
+        self.date = date
+        return date
+
+    
+
+    
 
 
         
