@@ -7,7 +7,7 @@ import numpy as np
 from utils.edicao_video_utils import EdicaoVideo, EdVideoMetaData
 from scipy.io import wavfile
 
-# python -m unittest discover
+## python -m unittest discover
 class extract_audio_feature_test(unittest.TestCase):
     @classmethod
     def setUpClass(self):
@@ -24,6 +24,7 @@ class extract_audio_feature_test(unittest.TestCase):
         ev.fs_wav = 4800
         ev.size_segmentation()
         ev.extract_audio_features.assert_called_once_with()
+
     '''
     def test_calculo_energia_media_mock(self):
         ev = EdicaoVideo(self.videoTestResourcesPath,self.testResourcesPath)
