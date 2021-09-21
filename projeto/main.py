@@ -1,4 +1,4 @@
-from utils.edicao_video_utils import EdicaoVideo
+from utils.edicao_video_utils import EdicaoVideo, EdVideoMetaData
 import os
 
 
@@ -17,10 +17,12 @@ if __name__ == '__main__':
 #main test
 if __name__ == '__main__':
     dirname=os.path.dirname #pega diretório atual
-    videoTestPath = os.path.join(dirname(dirname(__file__)))+"\\projeto\\tests\\resources\\video_t.mp4"
-    ev = EdicaoVideo(videoTestPath)
-    print(type(ev.extract_audio_features()))    
-    if(str(type(ev.extract_audio_features()))=="<class 'numpy.ndarray'>"):
-        print('true')
+    videoMainPath = os.path.join(dirname(dirname(__file__)))+"\\projeto\\test\\resources\\video_t.mp4"
+    mainResourcesPath = os.path.join(dirname(dirname(__file__)))+"\\projeto\\utils\\resources\\"
+    ev = EdicaoVideo(videoMainPath,mainResourcesPath)
+    mt = EdVideoMetaData()
+    print(type(mt.getDate()))
 '''
+
+
     
