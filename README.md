@@ -1,7 +1,7 @@
 :earth_americas:
 *[English](README-en.md) ∙ [Español](README-es.md)*
 
-## Descrição
+## Automatização de Edição de Vídeo Baseada em Áudio
 
 *Note: Projeto ainda não finalizado*
 
