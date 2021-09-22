@@ -1,7 +1,7 @@
 :earth_americas:
-*[Portuguese](README.md) ∙ [Español](README-es.md)*
+*[English](README-en.md) ∙ [Español](README-es.md)*
 
-<h1 align="center">Audio-based Automated Video Editing</h1>
+<h1 align="center">Edición de video automatizada basada en audio</h1>
 
 <div align="center">
  :ear::loud_sound::film_strip::scissors:
@@ -9,32 +9,32 @@
 
 <br />
 
-## Description
+## Descripción
 
-*Note: Project not yet finished*
+*Nota: Proyecto aún no terminado*
 
-The purpose of this work is to provide an automated video editing solution in order to save human work for editing very large videos and with certain editing standards. To do this, we used the energy of the audio from the video to identify the key editing points, and cut the original video at all these key/interest points and edit them all together in a single file.
+El propósito de este trabajo es proporcionar una solución de edición de video automatizada con el fin de ahorrar trabajo humano para editar videos muy grandes y con ciertos estándares de edición. Para hacer esto, usamos la energía del audio del video para identificar los puntos clave de edición, y cortamos el video original en todos estos puntos clave / de interés y los editamos todos juntos en un solo archivo.
 
-## Suggestion on how to import the virtual environment
+## Sugerencia sobre cómo importar el entorno virtual
 
-It is highly recommended when working with python projects, to use from [virtual environments](https://csguide.cs.princeton.edu/software/virtualenv), Python virtual environments help decouple and isolate Python versions and associated pip packages. This allows end users to install and manage their own set of packages that are independent of those provided by the system. Virtual environments allow you to have a stable, reproducible and portable environment. You control which versions of packages are installed and when they are updated.
-There are several ways to configure a virtual environment in python, I'm going to list here some good links that can help with this configuration: [:link:](https://docs.python.org/3/library/venv.html), [:link:](https://realpython.com/lessons/creating-virtual-environment/), [:link:](https://towardsdatascience.com/virtual-environments-for-absolute-beginners-what-is-it-and-how-to-create-one-examples-a48da8982d4b), [:link:](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
+Se recomienda encarecidamente cuando se trabaja con proyectos de Python, utilizar desde [entornos virtuales](https://csguide.cs.princeton.edu/software/virtualenv), los entornos virtuales de Python ayudan a desacoplar y aislar las versiones de Python y los paquetes pip asociados. Esto permite a los usuarios finales instalar y administrar su propio conjunto de paquetes que son independientes de los proporcionados por el sistema. Los entornos virtuales le permiten tener un entorno estable, reproducible y portátil. Usted controla qué versiones de paquetes se instalan y cuándo se actualizan.
+Hay varias formas de configurar un entorno virtual en Python, aquí enumeraré algunos buenos enlaces que pueden ayudar con esta configuración: [:link:](https://docs.python.org/3/library/venv.html), [:link:](https://realpython.com/lessons/creating-virtual-environment/), [:link:](https://towardsdatascience.com/virtual-environments-for-absolute-beginners-what-is-it-and-how-to-create-one-examples-a48da8982d4b), [:link:](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
 
-Once the method for creating the virtual environment is chosen, just check a way to create the environment according to the file  `requirements.txt`. I'll also list some good ways to do this here: [:link:](https://developer.akamai.com/blog/2017/06/21/how-building-virtual-python-environment), [:link:](https://gist.github.com/luiscape/19d2d73a8c7b59411a2fb73a697f5ed4), [:link:](https://www.jetbrains.com/help/pycharm/managing-dependencies.html), [:link:](https://www.codegrepper.com/code-examples/python/conda+create+requirements.txt).
+Una vez que se elige el método para crear el entorno virtual, simplemente marque una forma de crear el entorno de acuerdo con el archivo  `requirements.txt`. También enumeraré algunas buenas formas de hacer esto aquí: [:link:](https://developer.akamai.com/blog/2017/06/21/how-building-virtual-python-environment), [:link:](https://gist.github.com/luiscape/19d2d73a8c7b59411a2fb73a697f5ed4), [:link:](https://www.jetbrains.com/help/pycharm/managing-dependencies.html), [:link:](https://www.codegrepper.com/code-examples/python/conda+create+requirements.txt).
 
-My recommendation is to use the [Anaconda](https://conda.io/projects/conda/en/latest/index.html) to carry out the management of dependencies and virtualized environments, in a simpler way. And follow these steps:
+Mi recomendación es utilizar el [Anaconda](https://conda.io/projects/conda/en/latest/index.html) realizar la gestión de dependencias y entornos virtualizados, de forma más sencilla. Y sigue estos pasos:
 
-- [Anaconda dowload](https://www.anaconda.com/products/individual)
-- To create the environment [open Anaconda cmd](https://stackoverflow.com/questions/47914980/how-to-access-anaconda-command-prompt-in-windows-10-64-bit/55545141#:~:text=Go%20with%20the%20mouse%20to,%22Anaconda%20Prompt%22%20will%20open.), type on terminal `pip install -r requirements.txt` or if prefered conda syntax `conda create --name <env_name> --file requirements.txt`
-- It is interesting to verify at [anaconda navigator](https://docs.anaconda.com/anaconda/navigator/getting-started/) if environment was created right
-- Once the environment is created, you should check how to work with this environment within the IDE used, here are some links that exemplify this: [:link:](https://www.jetbrains.com/help/pycharm/conda-support-creating-conda-virtual-environment.html), [:link:](https://stackoverflow.com/questions/43351596/activating-anaconda-environment-in-vscode), [:link:](https://docs.anaconda.com/anaconda/user-guide/tasks/integration/sublime/)
-- After following this step by step, it is now possible to run the project in a suitable environment in the IDE that is preferred.
+- [Descargar Anaconda](https://www.anaconda.com/products/individual)
+- Para crear el medio ambiente [abrir el indicador de anaconda](https://stackoverflow.com/questions/47914980/how-to-access-anaconda-command-prompt-in-windows-10-64-bit/55545141#:~:text=Go%20with%20the%20mouse%20to,%22Anaconda%20Prompt%22%20will%20open.), escribe en la terminal `pip install -r requirements.txt` o si prefiere usar la sintaxis conda `conda create --name <env_name> --file requirements.txt`
+- It's interesting to check the [anaconda navigator](https://docs.anaconda.com/anaconda/navigator/getting-started/) si el ambiente fue creado correctamente
+- Una vez creado el entorno, debe comprobar cómo trabajar con este entorno dentro del IDE utilizado, aquí hay algunos enlaces que ejemplifican esto: [:link:](https://www.jetbrains.com/help/pycharm/conda-support-creating-conda-virtual-environment.html), [:link:](https://stackoverflow.com/questions/43351596/activating-anaconda-environment-in-vscode), [:link:](https://docs.anaconda.com/anaconda/user-guide/tasks/integration/sublime/)
+- Después de seguir este paso a paso, ahora es posible ejecutar el proyecto en un entorno adecuado en el IDE que se prefiera.
 
-## References for Audio Manipulation
+## Referencias para manipulación de audio
 
-The techniques used for audio treatment were based on the following materials: 
-- [Basic Audio Handling in Python](https://medium.com/behavioral-signals-ai/basic-audio-handling-d4cc9c70d64d)
-- [Guide to Digital Signal Processing](https://www.dspguide.com/)
+Las técnicas utilizadas para el tratamiento de audio se basaron en los siguientes materiales:
+- [Manejo básico de audio en Python](https://medium.com/behavioral-signals-ai/basic-audio-handling-d4cc9c70d64d)
+- [Guía para el procesamiento de señales digitales](https://www.dspguide.com/)
 
 
 
