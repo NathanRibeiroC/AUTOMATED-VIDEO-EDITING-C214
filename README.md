@@ -1,7 +1,13 @@
 :earth_americas:
 *[English](README-en.md) ∙ [Español](README-es.md)*
 
-## Automatização de Edição de Vídeo Baseada em Áudio
+<h1 align="center">
+  <a name="logo" href="https://www.vCloudInfo.com/tag/iot"><img src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/twitter_profile.png" alt="Bear Stone Smart Home" width="200"></a>
+  <br>
+  Automatização de Edição de Vídeo Baseada em Áudio
+</h1>
+
+## Descrição
 
 *Note: Projeto ainda não finalizado*
 
@@ -22,8 +28,11 @@ Minha recomendação é utilizar o [Anaconda](https://conda.io/projects/conda/en
 - Uma vez criado o ambiente, deve-se verificar como trabalhar com esse ambiente dentro da IDE utilizada, seguem alguns links que exemplificam isso: [:link:](https://www.jetbrains.com/help/pycharm/conda-support-creating-conda-virtual-environment.html), [:link:](https://stackoverflow.com/questions/43351596/activating-anaconda-environment-in-vscode), [:link:](https://docs.anaconda.com/anaconda/user-guide/tasks/integration/sublime/)
 - Após seguir esse passo a passo, já é possível rodar o projeto em um ambiente adequado na IDE que for preferida.
 
-## Licença
+## Referências para manipulação de áudio
 
+As técnicas utilizadas para tratamento do áudio foram baseadas nos seguintes materiais: 
+- [Manipulação Básica de Áudio em Python](https://medium.com/behavioral-signals-ai/basic-audio-handling-d4cc9c70d64d)
+- [Guia para Processamento Digital de Sinais](https://www.dspguide.com/)
 
 
 
