@@ -1,11 +1,13 @@
 :earth_americas:
 *[English](README-en.md) ∙ [Español](README-es.md)*
 
-<h1 align="center">
-  <a name="logo" href="https://www.vCloudInfo.com/tag/iot"><img src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/twitter_profile.png" alt="Bear Stone Smart Home" width="200"></a>
-  <br>
-  Automatização de Edição de Vídeo Baseada em Áudio
-</h1>
+<h1 align="center">Edição de Vídeo Automatizada baseada em Áudio</h1>
+
+<div align="center">
+ :ear::loud_sound::film_strip::scissors:
+</div>
+
+<br />
 
 ## Descrição
 
