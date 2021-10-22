@@ -1,32 +1,11 @@
 # pacote para edição de vídeo
 from moviepy.editor import *
-# arraynp
 import numpy as np
-from numpy.core.records import array
-# arquivo .wav
 from scipy.io import wavfile
-# plot
-import matplotlib.pyplot as plt
-#remove file
 import os
-#ordenação de lista
 from operator import itemgetter
-#identificação de subsequencias
 from itertools import groupby, count
-# pega data
 from datetime import datetime
-# adicionar package ao sys.path
-import sys
-from pathlib import Path 
-file = Path(__file__).resolve()
-parent, root = file.parent, file.parents[1]
-sys.path.append(str(root))
-
-# Additionally remove the current file's directory from sys.path
-try:
-    sys.path.remove(str(parent))
-except ValueError: # Already removed
-    pass
 
 class EdicaoVideo:
 
@@ -55,31 +34,32 @@ class EdicaoVideo:
         segment_size_t = 1 # tamanho de segmento em segundos
         segment_size = segment_size_t * self.fs_wav  # tamanho do segmento em amostras
         #quebrando o sinal em 56 páginas de 2 colunas(sinal stereo) e com 48000linhas (amostras)
-        self.segments = np.array([self.data_wav_norm[x:x + segment_size] for x in
+        segments = np.array([self.data_wav_norm[x:x + segment_size] for x in
                      np.arange(0, signal_len, segment_size)])
-        return self.segments
+        return segments
 
     def calculo_energia_media(self):
         """Cálculo da energia média dos segmentos do áudio"""
-        self.size_segmentation()
-        self.energies = [(s**2).sum() / len(s) for s in self.segments]
+        segments = self.size_segmentation()
+        self.energies = [(s**2).sum() / len(s) for s in segments]
         # sem normalização haveria integer overflow aqui
-        thres = 2.1 * np.median(self.energies)
-        index_of_segments_to_keep = (np.where(self.energies > thres)[0])
-        self.aux = index_of_segments_to_keep
+        self.thres = 2.1 * np.median(self.energies)
+        index_of_segments_to_keep = (np.where(self.energies > self.thres)[0])
+        aux = index_of_segments_to_keep
         #segmentos com energia maior do que o limiar
-        segments2 = self.segments[self.aux]
+        segments2 = segments[aux]
         #concatena segmentos dos sinais divididos, com valor de energia > limiar
         self.new_signal = np.concatenate(segments2)
         #vetores para plot (SE NECESSÁRIO NO FUTURO)
         x = [s for s in range(len(self.energies))]
-        y = np.ones(len(self.energies)) * thres
+        y = np.ones(len(self.energies)) * self.thres
+        return aux
 
     def subseq_max(self):
         """Código base de como identificar maior subsequência consecutiva de inteiros positivos dentro de array"""
-        self.calculo_energia_media()
-        array_aux = self.aux.tolist()
-        self.cuts = [] # tuplas que identificam pontos de corte nos vídeos
+        aux = self.calculo_energia_media()
+        array_aux = aux.tolist()
+        cuts = [] # tuplas que identificam pontos de corte nos vídeos
 
         def subMax(array):
             c = count()
@@ -100,48 +80,35 @@ class EdicaoVideo:
         #extraio todas as subsequências que virarão vídeos
         c = subMax(array_aux)
         while c:
-            self.cuts.append(c)
+            cuts.append(c)
             c = subMax(array_aux)
         #ordena vetor
-        self.cuts = sorted(self.cuts, key=itemgetter(0))
+        cuts = sorted(cuts, key=itemgetter(0))
+        return cuts
 
     def edita_video(self):
-        self.subseq_max()
+        cuts = self.subseq_max()
         """Edição de vídeo feita ao final de todas as etapas de processamento de áudio"""
         contA = 0 #quantos vídeos foram gerados
         clip_array = []
         #criacao arquivo base
-        clip0 = self.clip.subclip(self.cuts[0][0]-10,self.cuts[0][len(self.cuts[0])-1])
-        clip1 = self.clip.subclip(self.cuts[1][0]-10,self.cuts[1][len(self.cuts[1])-1])
+        clip0 = self.clip.subclip(cuts[0][0]-10,cuts[0][len(cuts[0])-1])
+        clip1 = self.clip.subclip(cuts[1][0]-10,cuts[1][len(cuts[1])-1])
         # concatinating both the clips
         final = concatenate_videoclips([clip0, clip1])
         final.write_videofile(self.resourcesPath+"corte_{0}.mp4".format(contA))
 
         contA = 0
-        for i in range(2 , len(self.cuts)):
+        for i in range(2 , len(cuts)):
             clip_base = VideoFileClip(self.resourcesPath+"corte_{0}.mp4".format(contA))
-            clip_corte = self.clip.subclip(self.cuts[i][0]-10,self.cuts[i][len(self.cuts[i])-1])
+            clip_corte = self.clip.subclip(cuts[i][0]-10,cuts[i][len(cuts[i])-1])
             final = concatenate_videoclips([clip_base, clip_corte])
             contA+=1
             final.write_videofile(self.resourcesPath+"corte_{0}.mp4".format(contA))
-            clip_base = 0 # desalocar memória do processo, p/ conseguir excluir o arquivo de corte
+            self.clip_base = 0 # desalocar memória do processo, p/ conseguir excluir o arquivo de corte
             os.remove(self.resourcesPath+"corte_{0}.mp4".format(contA-1))
         os.remove(self.resourcesPath+"edicao.wav")
-
-class EdVideoMetaData():
-    def __init__(self) -> None:
-        self.hour = 0
-        self.date = 0
-
-    def getTime(self):
-        time = datetime.now().time()
-        self.hour = time
-        return time
-
-    def getDate(self):
-        date = datetime.now().date()
-        self.date = date
-        return date
+        return contA
 
     
 
