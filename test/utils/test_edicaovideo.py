@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 
 ## python -m unittest discover
-class extract_audio_feature_test(unittest.TestCase):
+class edicao_video_utils_test(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.dirname=os.path.dirname #pega diretório atual

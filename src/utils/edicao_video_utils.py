@@ -12,7 +12,9 @@ class EdicaoVideo:
     def __init__(self, videoPath, resourcesPath):     
         """Características principais do arquivo de vídeo""" 
         self.resourcesPath = resourcesPath
+        print('Resources path: ' + self.resourcesPath)
         self.path = videoPath # caminho do vídeo
+        print('Video path: '+self.path)
         self.clip = VideoFileClip(self.path) # array que representa vídeo
 
 
@@ -25,6 +27,7 @@ class EdicaoVideo:
         #normalização
         #divide por 2^15 que geralmente é a resolução de cada bit por amostra
         self.data_wav_norm = self.data_wav / (2**15)
+        print('DONE - extract_audio_features - 20% concluído')
         return self.data_wav_norm
 
     def size_segmentation(self):
@@ -36,6 +39,7 @@ class EdicaoVideo:
         #quebrando o sinal em 56 páginas de 2 colunas(sinal stereo) e com 48000linhas (amostras)
         segments = np.array([self.data_wav_norm[x:x + segment_size] for x in
                      np.arange(0, signal_len, segment_size)])
+        print('DONE - size_segmentation - 40% concluído')
         return segments
 
     def calculo_energia_media(self):
@@ -53,6 +57,7 @@ class EdicaoVideo:
         #vetores para plot (SE NECESSÁRIO NO FUTURO)
         x = [s for s in range(len(self.energies))]
         y = np.ones(len(self.energies)) * self.thres
+        print('DONE - calculo_energia_media - 60% concluído')
         return aux
 
     def subseq_max(self):
@@ -84,6 +89,7 @@ class EdicaoVideo:
             c = subMax(array_aux)
         #ordena vetor
         cuts = sorted(cuts, key=itemgetter(0))
+        print('DONE - subseq_max - 80% concluído')
         return cuts
 
     def edita_video(self):
@@ -108,6 +114,7 @@ class EdicaoVideo:
             self.clip_base = 0 # desalocar memória do processo, p/ conseguir excluir o arquivo de corte
             os.remove(self.resourcesPath+"corte_{0}.mp4".format(contA-1))
         os.remove(self.resourcesPath+"edicao.wav")
+        print('DONE - edita_video - 100% concluído')
         return contA
 
     
