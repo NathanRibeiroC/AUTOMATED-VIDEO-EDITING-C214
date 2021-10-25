@@ -187,6 +187,8 @@ class Ui_MainWindow(object):
         self.status_label.setStyleSheet('color: blue')
         self.status_label.setText('Edição Concluída')
         self.editarPushButton.setText('Editar')
+        self.edit_thread.quit()
+        self.edit_thread.deleteLater()
 
     def update_progressbar(self,value):
         self.progressBar.show()
