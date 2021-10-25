@@ -25,9 +25,10 @@ class Worker(QObject):
         #self.progress.emit(i + 1)
         self.finished.emit()
 '''
-class CloneThread(QThread):
+class EditThread(QThread):
     signal = pyqtSignal('PyQt_PyObject')
     finished = pyqtSignal()
+    progress = pyqtSignal(int)
 
     def __init__(self,filename,resourcesPath):
         QThread.__init__(self)
@@ -36,7 +37,9 @@ class CloneThread(QThread):
 
     # run method gets called when we start the thread
     def run(self):
+        self.progress.emit(25)
         EdicaoVideo(self.f, self.r).edita_video()
+        self.progress.emit(100)
         # git clone done, now inform the main thread with the output
         self.finished.emit()
 
@@ -113,7 +116,7 @@ class Ui_MainWindow(object):
         dirname = os.path.dirname
         self.resourcesPath = os.path.join(dirname(dirname(__file__))) + '\\resources\\'  # parent do diretório atual + folder recources
         self.label_3.setText('Salvar em: ' + str(self.resourcesPath))
-        self.label_2.setText('Status: Nenhum arquivo importado')
+        self.status_label.setText('Nenhum arquivo importado')
 
         # configuração toolbar
         self.toolbar = NavigationToolbar(self.widget.canvas, self.centralwidget)
@@ -128,7 +131,11 @@ class Ui_MainWindow(object):
         self.actionDefinir_diret_rio_destino.triggered.connect(self.set_video_edited_path)
 
         # push button editar
-        self.editarPushButton.clicked.connect(self.git_clone)
+        self.editarPushButton.clicked.connect(self.edit_video)
+
+        # progress bar
+        self.progressBar.setValue(0)
+        self.progressBar.hide()
 
     '''
     def edit_video(self):
@@ -163,10 +170,27 @@ class Ui_MainWindow(object):
         #)
     '''
 
-    def git_clone(self):
+    def edit_video(self):
         # defining thread
-        self.git_thread = CloneThread(self.filename,self.resourcesPath)  # This is the thread object
-        self.git_thread.start()  # Finally starts the thread
+        self.edit_thread = EditThread(self.filename,self.resourcesPath)  # This is the thread object
+        self.status_label.setStyleSheet('color: yellow')
+        self.status_label.setText('Edição em andamento')
+        self.editarPushButton.setEnabled(False)
+        self.editarPushButton.setText('Editando ...')
+        self.edit_thread.progress.connect(self.update_progressbar)
+        self.edit_thread.start()  # Finally starts the thread
+        self.edit_thread.finished.connect(self.reset)
+
+    def reset(self):
+        self.progressBar.hide()
+        self.label.setText('Opções --> Importar Vídeo --> Editar')
+        self.status_label.setStyleSheet('color: blue')
+        self.status_label.setText('Edição Concluída')
+        self.editarPushButton.setText('Editar')
+
+    def update_progressbar(self,value):
+        self.progressBar.show()
+        self.progressBar.setValue(value)
 
     def get_video_file_path(self):
         aux = str(QFileDialog.getOpenFileName()[0]).replace("/","\\")
@@ -174,13 +198,14 @@ class Ui_MainWindow(object):
             self.filename = aux
             self.editarPushButton.setEnabled(True)
             self.label.setText('File: ' + str(self.filename))
-            self.label_2.setText('Status: Arquivo importado')
+            self.status_label.setStyleSheet('color: green')
+            self.status_label.setText('Pronto para edição')
         else:
             pass
 
 
     def set_video_edited_path(self):
-        aux = str(QFileDialog.getExistingDirectory()).replace("/","\\")
+        aux = str(QFileDialog.getExistingDirectory()+'/').replace("/","\\")
         if(aux!=''):
             self.resourcesPath = aux
             self.label_3.setText('Salvar em: ' + self.resourcesPath)
