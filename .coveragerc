@@ -1,0 +1,5 @@
+[run]
+omit = tests/*
+
+[tool:pytest]
+addopts = --cov=PROJETO_C214 --cov-report html --cov-fail-under=80
