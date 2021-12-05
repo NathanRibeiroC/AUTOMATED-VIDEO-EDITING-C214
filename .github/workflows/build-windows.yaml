@@ -30,9 +30,9 @@ jobs:
         C:\Miniconda\condabin\conda.bat install pytest
         pytest
 
-    - name: Covarage report
+    - name: Coverage report
       run: |
         C:\Miniconda\condabin\conda.bat activate base
-        C:\Miniconda\condabin\conda.bat install coverage
+        C:\Miniconda\condabin\conda.bat install -c anaconda coverage
         coverage report --fail-under=80
 
