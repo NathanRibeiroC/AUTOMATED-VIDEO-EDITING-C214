@@ -11,7 +11,8 @@ class edicao_video_utils_test(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.dirname=os.path.dirname #pega diretório atual
-        cls.testResourcesPath = os.path.join(cls.dirname(cls.dirname(cls.dirname(__file__)))) + "\\test\\resources\\"
+        #cls.testResourcesPath = os.path.join(cls.dirname(cls.dirname(cls.dirname(__file__)))) + "\\test\\resources\\"
+        cls.testResourcesPath = os.path.join(cls.dirname(cls.dirname(__file__))) + "\\test\\resources\\"
         cls.videoTestResourcesPath = cls.testResourcesPath + "video_t.mp4"
         cls.ev = EdicaoVideo(cls.videoTestResourcesPath, cls.testResourcesPath)
 
