@@ -14,17 +14,6 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import (NavigationToolbar2QT as NavigationToolbar)
 from ..utils.edicao_video_utils import EdicaoVideo
 
-'''
-# Step 1: Create a worker class
-class Worker(QObject):
-    finished = pyqtSignal()
-    progress = pyqtSignal(int)
-
-    def run(self,filename,resourcesPath):
-        EdicaoVideo(filename, resourcesPath).edita_video()
-        #self.progress.emit(i + 1)
-        self.finished.emit()
-'''
 class EditThread(QThread):
     signal = pyqtSignal('PyQt_PyObject')
     finished = pyqtSignal()
@@ -137,39 +126,6 @@ class Ui_MainWindow(object):
         self.progressBar.setValue(0)
         self.progressBar.hide()
 
-    '''
-    def edit_video(self):
-        EdicaoVideo(self.filename, self.resourcesPath).edita_video()
-    '''
-    '''
-    def edit_video(self):
-        # Step 2: Create a QThread object
-        self.thread = QThread()
-        # Step 3: Create a worker object
-        self.worker = Worker()
-        # Step 4: Move worker to the thread
-        self.worker.moveToThread(self.thread)
-        # Step 5: Connect signals and slots
-        self.thread.started.connect(self.worker.run(self.filename,self.resourcesPath))
-        self.worker.finished.connect(self.thread.quit)
-        self.worker.finished.connect(self.worker.deleteLater)
-        self.thread.finished.connect(self.thread.deleteLater)
-        self.worker.progress.connect()
-        # Step 6: Start the thread
-        self.thread.start()
-
-        # Final resets
-        #self.longRunningBtn.setEnabled(False)
-        #self.thread.finished.connect(
-            #lambda: self.longRunningBtn.setEnabled(True)
-        #    pass
-        #)
-        #self.thread.finished.connect(
-            #lambda: self.stepLabel.setText("Long-Running Step: 0")
-        #    pass
-        #)
-    '''
-
     def edit_video(self):
         # defining thread
         self.edit_thread = EditThread(self.filename,self.resourcesPath)  # This is the thread object
@@ -204,7 +160,6 @@ class Ui_MainWindow(object):
             self.status_label.setText('Pronto para edição')
         else:
             pass
-
 
     def set_video_edited_path(self):
         aux = str(QFileDialog.getExistingDirectory()+'/').replace("/","\\")
