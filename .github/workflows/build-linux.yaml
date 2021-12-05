@@ -26,5 +26,5 @@ jobs:
   # Installing and running unittest
     - name: Test with unnitest
       run: |
-        conda install unnitest
-        $CONDA/bin/unnitest
+        conda install -c anaconda unittest2
+        $CONDA/bin/unnitest2
