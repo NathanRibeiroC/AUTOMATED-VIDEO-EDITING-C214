@@ -23,3 +23,8 @@ jobs:
         C:\Miniconda\condabin\conda.bat install pylint
         python lint.py --path ./test --threshold 8
         python lint.py --path ./src --threshold 6
+  # Installing and running unnitest
+    - name: Test with unnitest
+      run: |
+        conda install unnitest
+        $CONDA/bin/unnitest
