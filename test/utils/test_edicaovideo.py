@@ -6,7 +6,9 @@ from pathlib import Path
 import numpy as np
 
 ## python -m unittest discover
+
 class edicao_video_utils_test(unittest.TestCase):
+
 
     @classmethod
     def setUpClass(cls):
@@ -22,6 +24,7 @@ class edicao_video_utils_test(unittest.TestCase):
 
     def test_type_retorn_extract_audio_feature(self):
         self.assertEqual(str(type(self.ev.extract_audio_features())),"<class 'numpy.ndarray'>")
+
 
     def test_extract_audio_feature_cria_wav_file(self):
         self.ev.extract_audio_features()
