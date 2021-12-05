@@ -26,5 +26,6 @@ jobs:
   # Installing and running unnitest
     - name: Test with unnitest
       run: |
-        conda install pytest
-        $CONDA/bin/pytest
+        C:\Miniconda\condabin\conda.bat activate base
+        C:\Miniconda\condabin\conda.bat install pytest
+        pytest
