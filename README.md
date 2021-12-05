@@ -1,4 +1,4 @@
-
+[![Build - Windows](https://github.com/NathanRibeiroC/L3_C214/actions/workflows/build-windows.yaml/badge.svg)](https://github.com/NathanRibeiroC/L3_C214/actions/workflows/build-windows.yaml)
 :earth_americas:
 *[English](README-en.md) ∙ [Español](README-es.md)*
 
