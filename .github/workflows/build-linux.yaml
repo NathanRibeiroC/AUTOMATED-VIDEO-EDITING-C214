@@ -18,11 +18,11 @@ jobs:
         # $CONDA is an environment variable pointing to the root of the miniconda directory
         $CONDA/bin/conda env update --file environment.yml --name base
   # Installing and running lint based on lint.py runnable file
-    - name: Lint with pylint
-      run: |
-        $CONDA/bin/conda install pylint
-        $CONDA/bin/python lint.py --path ./test --threshold 8
-        $CONDA/bin/python lint.py --path ./src --threshold 6
+  #  - name: Lint with pylint
+  #    run: |
+  #      $CONDA/bin/conda install pylint
+  #      $CONDA/bin/python lint.py --path ./test --threshold 8
+  #      $CONDA/bin/python lint.py --path ./src --threshold 6
   # Installing and running unittest
     - name: Test with unnitest
       run: |
