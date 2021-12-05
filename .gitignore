@@ -130,3 +130,7 @@ dmypy.json
 
 #Pycharm config file
 .idea/
+
+#Coverage report
+htmlcov/
+.coverage
