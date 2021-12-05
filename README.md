@@ -1,3 +1,4 @@
+
 :earth_americas:
 *[English](README-en.md) ∙ [Español](README-es.md)*
 
@@ -8,6 +9,10 @@
 </div>
 
 <br />
+
+# PROJETO_C214
+
+## Projeto desenvolvido com o Monitor Leonardo :wink:
 
 ## Descrição
 
@@ -35,7 +40,3 @@ Minha recomendação é utilizar o [Anaconda](https://conda.io/projects/conda/en
 As técnicas utilizadas para tratamento do áudio foram baseadas nos seguintes materiais: 
 - [Manipulação Básica de Áudio em Python](https://medium.com/behavioral-signals-ai/basic-audio-handling-d4cc9c70d64d)
 - [Guia para Processamento Digital de Sinais](https://www.dspguide.com/)
-
-
-
-
