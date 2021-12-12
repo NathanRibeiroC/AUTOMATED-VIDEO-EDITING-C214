@@ -10,17 +10,24 @@
  :ear::loud_sound::film_strip::scissors:
 </div>
 
+<p align="center">
+ <a href="#Descrição">Descrição</a> •
+ <a href="#Sugestão de como importar o ambiente virtual">Sugestão de como importar o ambiente virtual</a> •
+ <a href="#Associação do ambiente virtual à IDE">Associação do ambiente virtual à IDE</a> •
+ <a href="#Referências para manipulação de áudio">Como Testar</a> 
+</p>
+
 <br />
 
 # PROJETO_C214
 
 ## Projeto desenvolvido com o Monitor Leonardo :wink:
 
-## Descrição :memo:
+## Descrição :memo: <a name="Descrição"></a>
 
 O intuito deste trabalho é fornecer uma solução de edição de vídeo automatizada visando poupar o trabalho humano para edição de vídeos muito grandes e com certos padrões de edição. Para tal, foi utilizada da energia do áudio do vídeo para identificar os pontos chaves de edição, e fazer um corte do vídeo original em todos esses pontos chaves/de interesse e editar todos eles juntos em único arquivo.
 
-## Sugestão de como importar o ambiente virtual 	:arrows_clockwise::computer:
+## Sugestão de como importar o ambiente virtual 	:arrows_clockwise::computer: <a name="Sugestão de como importar o ambiente virtual"></a>
 
 É altamente recomendável ao trabalhar com projetos python, utilizar de [ambientes virtuais](https://csguide.cs.princeton.edu/software/virtualenv), os ambientes virtuais Python ajudam a desacoplar e isolar versões do Python e pacotes pip associados. Isso permite que os usuários finais instalem e gerenciem seu próprio conjunto de pacotes que são independentes daqueles fornecidos pelo sistema. Os ambientes virtuais permitem que você tenha um ambiente estável, reproduzível e portátil. Você controla quais versões de pacotes são instaladas e quando são atualizadas.
 Existem várias maneiras de se configurar um ambiente virtual em python, vou listar aqui alguns bons links que podem ajudar nessa configuração: [:link:](https://docs.python.org/3/library/venv.html), [:link:](https://realpython.com/lessons/creating-virtual-environment/), [:link:](https://towardsdatascience.com/virtual-environments-for-absolute-beginners-what-is-it-and-how-to-create-one-examples-a48da8982d4b), [:link:](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
@@ -138,7 +145,7 @@ Minha recomendação é utilizar o [Anaconda](https://conda.io/projects/conda/en
 
 - Uma vez criado o ambiente, deve-se verificar como trabalhar com esse ambiente dentro da IDE utilizada, que será abordado melhor no próximo tópico
 
-## Associação do ambiente virtual à IDE :snake::computer::gear:
+## Associação do ambiente virtual à IDE :snake::computer::gear: <a name="Associação do ambiente virtual à IDE"></a>
 
 Existem várias IDEs utilizadas para desenvolvimento em linguagem python, e cada uma tem uma maneira de fazer a associação do ambiente virtual e a seleção do interpretador Python. Listarei aqui como fazer esse processo em 3 IDEs. Porém recomendo fortemente o uso do Pycharm, principalmente pelo fato de que ele fará a associação das variáveis ao sistema de forma automática, eliminando assim, problemas referente ao uso de imports relativos entre os módulos da solução.
 - Pycharm [:link:](https://www.jetbrains.com/help/pycharm/conda-support-creating-conda-virtual-environment.html), [:link:](https://www.jetbrains.com/help/pycharm/configuring-python-interpreter.html)
@@ -201,7 +208,7 @@ Existem várias IDEs utilizadas para desenvolvimento em linguagem python, e cada
 - Visual Studio Code [:link:](https://medium.com/@joaolggross/como-configurar-o-vs-code-com-anaconda-e-jupyter-notebooks-b05258bf65c1), [:link:](https://code.visualstudio.com/docs/python/environments)
 - Sublime Text [:link:](https://docs.anaconda.com/anaconda/user-guide/tasks/integration/sublime/), [:link:](http://damnwidget.github.io/anaconda/anaconda_settings/)
 
-## Referências para manipulação de áudio :books:
+## Referências para manipulação de áudio :books: <a name="Referências para manipulação de áudio"></a>
 
 As técnicas utilizadas para tratamento do áudio foram baseadas nos seguintes materiais: 
 - [Manipulação Básica de Áudio em Python](https://medium.com/behavioral-signals-ai/basic-audio-handling-d4cc9c70d64d)
