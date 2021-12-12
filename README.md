@@ -201,7 +201,7 @@ Existem várias IDEs utilizadas para desenvolvimento em linguagem python, e cada
 - Visual Studio Code [:link:](https://medium.com/@joaolggross/como-configurar-o-vs-code-com-anaconda-e-jupyter-notebooks-b05258bf65c1), [:link:](https://code.visualstudio.com/docs/python/environments)
 - Sublime Text [:link:](https://docs.anaconda.com/anaconda/user-guide/tasks/integration/sublime/), [:link:](http://damnwidget.github.io/anaconda/anaconda_settings/)
 
-## Referências para manipulação de áudio
+## Referências para manipulação de áudio :books:
 
 As técnicas utilizadas para tratamento do áudio foram baseadas nos seguintes materiais: 
 - [Manipulação Básica de Áudio em Python](https://medium.com/behavioral-signals-ai/basic-audio-handling-d4cc9c70d64d)
