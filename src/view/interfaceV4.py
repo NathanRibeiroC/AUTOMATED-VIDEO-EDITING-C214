@@ -14,35 +14,35 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import (NavigationToolbar2QT as NavigationToolbar)
 from ..utils.edicao_video_utils import EdicaoVideo
 
-'''
-# Step 1: Create a worker class
-class Worker(QObject):
-    finished = pyqtSignal()
-    progress = pyqtSignal(int)
+x = 10
+y = 10
+e = 10
 
-    def run(self,filename,resourcesPath):
-        EdicaoVideo(filename, resourcesPath).edita_video()
-        #self.progress.emit(i + 1)
-        self.finished.emit()
-'''
+"""Class that implements the thread called when editing video, to avoid freezing UI"""
 class EditThread(QThread):
     signal = pyqtSignal('PyQt_PyObject')
     finished = pyqtSignal()
     progress = pyqtSignal(int)
 
+    """Thread class initializator"""
     def __init__(self,filename,resourcesPath):
         QThread.__init__(self)
-        self.f = filename
-        self.r = resourcesPath
+        self.f = filename #Filename we want to edit path
+        self.r = resourcesPath #Folder we want to save our edited file
 
-    # run method gets called when we start the thread
+    """Run method gets called when we start the thread"""
     def run(self):
-        self.progress.emit(25)
-        EdicaoVideo(self.f, self.r).edita_video()
-        self.progress.emit(100)
-        # git clone done, now inform the main thread with the output
-        self.finished.emit()
+        global x
+        global y
+        global e
+        ev = EdicaoVideo(self.f, self.r)
+        self.progress.emit(25) #Updates progress bar
+        ev.edita_video() #Calls video editing method
+        self.progress.emit(100) #Updates progress bar
+        x, y, e = ev.return_x_y()
+        self.finished.emit() #Finished video editing thread
 
+"""Class that defines matplot lib layout"""
 class MplWidget(QWidget):
 
     def __init__(self, parent=None):
@@ -56,7 +56,9 @@ class MplWidget(QWidget):
         self.canvas.axes = self.canvas.figure.add_subplot(111)
         self.setLayout(vertical_layout)
 
+"""Class that defines UI elements and it's methods"""
 class Ui_MainWindow(object):
+    """Method that is responsible for seting up UI's elements"""
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(749, 584)
@@ -112,88 +114,68 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        # set caminho padrão para salvar o vídeo editado
+        #Set default path to save our edited video
         dirname = os.path.dirname
         self.resourcesPath = os.path.join(dirname(dirname(__file__))) + '\\resources\\'  # parent do diretório atual + folder recources
         self.label_3.setText('Salvar em: ' + str(self.resourcesPath))
         self.status_label.setText('Nenhum arquivo importado')
 
-        # configuração toolbar
+        #Toolbar configuration
         self.toolbar = NavigationToolbar(self.widget.canvas, self.centralwidget)
         self.horizontalLayout_ApplyStyle.addWidget(self.toolbar)
 
-        # desabilita botão
+        #Unable edit button
         self.editarPushButton.setEnabled(False)
 
-        # menubar import video
+        #Action triggered when clicking on "Import video" option on "Options"
         self.actionImport_Video.triggered.connect(self.get_video_file_path)
-        # menubar set lugar para salvar o vídeo pós edição
+        #Action triggered when clicking on "Definir diretório destino" option on "Options"
         self.actionDefinir_diret_rio_destino.triggered.connect(self.set_video_edited_path)
 
-        # push button editar
+        #Action triggered when clicking on Edit button, if it is enabled
         self.editarPushButton.clicked.connect(self.edit_video)
 
-        # progress bar
+        #Set progress bar default configuration
         self.progressBar.setValue(0)
         self.progressBar.hide()
 
-    '''
+    """Method that calls video editing"""
     def edit_video(self):
-        EdicaoVideo(self.filename, self.resourcesPath).edita_video()
-    '''
-    '''
-    def edit_video(self):
-        # Step 2: Create a QThread object
-        self.thread = QThread()
-        # Step 3: Create a worker object
-        self.worker = Worker()
-        # Step 4: Move worker to the thread
-        self.worker.moveToThread(self.thread)
-        # Step 5: Connect signals and slots
-        self.thread.started.connect(self.worker.run(self.filename,self.resourcesPath))
-        self.worker.finished.connect(self.thread.quit)
-        self.worker.finished.connect(self.worker.deleteLater)
-        self.thread.finished.connect(self.thread.deleteLater)
-        self.worker.progress.connect()
-        # Step 6: Start the thread
-        self.thread.start()
+        self.edit_thread = EditThread(self.filename,self.resourcesPath)  #Instantiate thread object
+        self.status_label.setStyleSheet('color: yellow') #Sets status label to yellow
+        self.status_label.setText('Edição em andamento') #Changes status label text content
+        self.editarPushButton.setEnabled(False) #Unables edit button
+        self.editarPushButton.setText('Editando ...') #Changes status label text content
+        self.edit_thread.progress.connect(self.update_progressbar) #Configures thread to pass emit method value as update_progressbar parameter
+        self.edit_thread.start()  #Starts the thread
+        self.edit_thread.finished.connect(self.reset) #When finishes thread calls reset method
 
-        # Final resets
-        #self.longRunningBtn.setEnabled(False)
-        #self.thread.finished.connect(
-            #lambda: self.longRunningBtn.setEnabled(True)
-        #    pass
-        #)
-        #self.thread.finished.connect(
-            #lambda: self.stepLabel.setText("Long-Running Step: 0")
-        #    pass
-        #)
-    '''
+    def plot_audio(self):
+        global x
+        global y
+        global e
+        self.widget.canvas.axes.clear()
+        self.widget.canvas.axes.plot(x, y, label='Áudio do Vídeo')
+        self.widget.canvas.axes.plot(x, e, label='Limiar')
+        self.widget.canvas.draw()
 
-    def edit_video(self):
-        # defining thread
-        self.edit_thread = EditThread(self.filename,self.resourcesPath)  # This is the thread object
-        self.status_label.setStyleSheet('color: yellow')
-        self.status_label.setText('Edição em andamento')
-        self.editarPushButton.setEnabled(False)
-        self.editarPushButton.setText('Editando ...')
-        self.edit_thread.progress.connect(self.update_progressbar)
-        self.edit_thread.start()  # Finally starts the thread
-        self.edit_thread.finished.connect(self.reset)
-
+    """Method that resets UI's informations after video editing"""
     def reset(self):
-        self.progressBar.hide()
-        self.label.setText('Opções --> Importar Vídeo --> Editar')
-        self.status_label.setStyleSheet('color: blue')
-        self.status_label.setText('Edição Concluída')
-        self.editarPushButton.setText('Editar')
-        self.edit_thread.quit()
-        self.edit_thread.deleteLater()
+        self.progressBar.hide() #Hide progressbar
+        self.label.setText('Opções --> Importar Vídeo --> Editar') #Resets description on UI
+        self.status_label.setStyleSheet('color: blue') #Resets description on UI
+        self.status_label.setText('Edição Concluída') #Resets description on UI
+        self.editarPushButton.setText('Editar') #Changes text on edit button
+        self.edit_thread.quit() #Quit from thread
+        self.edit_thread.deleteLater() #Delete thread
+        self.plot_audio()
 
+    """Method that updates progress bar"""
     def update_progressbar(self,value):
-        self.progressBar.show()
-        self.progressBar.setValue(value)
+        self.progressBar.show() #Shows progress bar
+        self.progressBar.setValue(value) #Sets progress bar value
 
+    """Method that opens OS' modal to catch the path you want to save your edited video"""
     def get_video_file_path(self):
         aux = str(QFileDialog.getOpenFileName()[0]).replace("/","\\")
         if(aux!=''):
@@ -205,7 +187,7 @@ class Ui_MainWindow(object):
         else:
             pass
 
-
+    """Method that sets the path we want to save our edited video"""
     def set_video_edited_path(self):
         aux = str(QFileDialog.getExistingDirectory()+'/').replace("/","\\")
         if(aux!=''):
@@ -214,6 +196,7 @@ class Ui_MainWindow(object):
         else:
             pass
 
+    """Method used during UI's execution"""
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "PROJETO C213"))
@@ -224,5 +207,3 @@ class Ui_MainWindow(object):
         self.menuOp_es.setTitle(_translate("MainWindow", "Opções"))
         self.actionImport_Video.setText(_translate("MainWindow", "Import Video"))
         self.actionDefinir_diret_rio_destino.setText(_translate("MainWindow", "Definir diretório destino"))
-
-
