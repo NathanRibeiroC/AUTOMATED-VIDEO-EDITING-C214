@@ -209,10 +209,10 @@ Existem várias IDEs utilizadas para desenvolvimento em linguagem python, e cada
 - Visual Studio Code [:link:](https://medium.com/@joaolggross/como-configurar-o-vs-code-com-anaconda-e-jupyter-notebooks-b05258bf65c1), [:link:](https://code.visualstudio.com/docs/python/environments)
 - Sublime Text [:link:](https://docs.anaconda.com/anaconda/user-guide/tasks/integration/sublime/), [:link:](http://damnwidget.github.io/anaconda/anaconda_settings/)
 
-## Teste unitário <a name="Teste"></a>
-### Rodar todos os testes 
+## Teste unitário :white_check_mark: <a name="Teste"></a>
+### Rodar todos os testes :runner:
 `python -m unittest discover`
-### Rodar coverage
+### Rodar coverage :bar_chart:
 `coverage report -m`
 
 ## Referências para manipulação de áudio :books: <a name="Referências para manipulação de áudio"></a>
