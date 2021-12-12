@@ -208,6 +208,7 @@ Existem várias IDEs utilizadas para desenvolvimento em linguagem python, e cada
 ### Rodar todos os testes :runner:
 `python -m unittest discover`
 ### Rodar coverage :bar_chart:
+`coverage.py run -m unittest discover`
 `coverage report`
 
 ## Referências para manipulação de áudio :books: <a name="Referências para manipulação de áudio"></a>
