@@ -20,8 +20,6 @@
 
 <br />
 
-# PROJETO_C214
-
 ## Projeto desenvolvido com o Monitor Leonardo :wink:
 
 ## Descrição :memo: <a name="Descrição"></a>
