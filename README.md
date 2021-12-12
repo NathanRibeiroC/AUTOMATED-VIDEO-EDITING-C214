@@ -198,12 +198,6 @@ Existem várias IDEs utilizadas para desenvolvimento em linguagem python, e cada
   <img width="1320" height="720" src="https://user-images.githubusercontent.com/80288857/137567055-496ad2b9-716c-4a48-b207-d595b697eaf0.png">
   </p> 
   
-  9. O projeto já estará funcionando.
-  
-  <p align="center">
-  <img width="1314" height="716" src="https://user-images.githubusercontent.com/80288857/137567057-5b1c89ee-56b6-4cd7-81ef-ece2afcf3b64.png">
-  </p>  
-  
 </details>
 
 - Visual Studio Code [:link:](https://medium.com/@joaolggross/como-configurar-o-vs-code-com-anaconda-e-jupyter-notebooks-b05258bf65c1), [:link:](https://code.visualstudio.com/docs/python/environments)
