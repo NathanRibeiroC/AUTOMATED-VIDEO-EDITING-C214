@@ -206,9 +206,8 @@ Existem várias IDEs utilizadas para desenvolvimento em linguagem python, e cada
 
 ## Teste unitário :white_check_mark: <a name="Teste"></a>
 ### Rodar todos os testes :runner:
-`python -m unittest discover`
-### Rodar coverage :bar_chart:
 - `coverage run -m unittest discover`
+### Rodar coverage :bar_chart:
 - `coverage report`
 
 ## Referências para manipulação de áudio :books: <a name="Referências para manipulação de áudio"></a>
