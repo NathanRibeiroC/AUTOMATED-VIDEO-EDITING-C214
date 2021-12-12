@@ -1,6 +1,3 @@
-:earth_americas:
-*[English](README-en.md) ∙ [Español](README-es.md)*
-
 [![Build](https://github.com/NathanRibeiroC/PROJETO_C214/actions/workflows/build-windows.yaml/badge.svg)](https://github.com/NathanRibeiroC/PROJETO_C214/actions/workflows/build-windows.yaml)
 [![Python 3V's](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-360/)
 
