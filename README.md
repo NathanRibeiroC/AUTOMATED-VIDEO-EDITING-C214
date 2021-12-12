@@ -16,11 +16,11 @@
 
 ## Projeto desenvolvido com o Monitor Leonardo :wink:
 
-## Descrição
+## Descrição :memo:
 
 O intuito deste trabalho é fornecer uma solução de edição de vídeo automatizada visando poupar o trabalho humano para edição de vídeos muito grandes e com certos padrões de edição. Para tal, foi utilizada da energia do áudio do vídeo para identificar os pontos chaves de edição, e fazer um corte do vídeo original em todos esses pontos chaves/de interesse e editar todos eles juntos em único arquivo.
 
-## Sugestão de como importar o ambiente virtual
+## Sugestão de como importar o ambiente virtual 	:arrows_clockwise::computer:
 
 É altamente recomendável ao trabalhar com projetos python, utilizar de [ambientes virtuais](https://csguide.cs.princeton.edu/software/virtualenv), os ambientes virtuais Python ajudam a desacoplar e isolar versões do Python e pacotes pip associados. Isso permite que os usuários finais instalem e gerenciem seu próprio conjunto de pacotes que são independentes daqueles fornecidos pelo sistema. Os ambientes virtuais permitem que você tenha um ambiente estável, reproduzível e portátil. Você controla quais versões de pacotes são instaladas e quando são atualizadas.
 Existem várias maneiras de se configurar um ambiente virtual em python, vou listar aqui alguns bons links que podem ajudar nessa configuração: [:link:](https://docs.python.org/3/library/venv.html), [:link:](https://realpython.com/lessons/creating-virtual-environment/), [:link:](https://towardsdatascience.com/virtual-environments-for-absolute-beginners-what-is-it-and-how-to-create-one-examples-a48da8982d4b), [:link:](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
