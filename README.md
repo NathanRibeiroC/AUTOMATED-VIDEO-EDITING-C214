@@ -14,7 +14,8 @@
  <a href="#Descrição">Descrição</a> •
  <a href="#Sugestão de como importar o ambiente virtual">Sugestão de como importar o ambiente virtual</a> •
  <a href="#Associação do ambiente virtual à IDE">Associação do ambiente virtual à IDE</a> •
- <a href="#Referências para manipulação de áudio">Como Testar</a> 
+ <a href="#Teste">Teste unitário</a> •
+ <a href="#Referências para manipulação de áudio">Referências para manipulação de áudio</a> 
 </p>
 
 <br />
@@ -207,6 +208,12 @@ Existem várias IDEs utilizadas para desenvolvimento em linguagem python, e cada
 
 - Visual Studio Code [:link:](https://medium.com/@joaolggross/como-configurar-o-vs-code-com-anaconda-e-jupyter-notebooks-b05258bf65c1), [:link:](https://code.visualstudio.com/docs/python/environments)
 - Sublime Text [:link:](https://docs.anaconda.com/anaconda/user-guide/tasks/integration/sublime/), [:link:](http://damnwidget.github.io/anaconda/anaconda_settings/)
+
+## Teste unitário <a name="Teste"></a>
+### Rodar todos os testes 
+`python -m unittest discover`
+### Rodar coverage
+`coverage report -m`
 
 ## Referências para manipulação de áudio :books: <a name="Referências para manipulação de áudio"></a>
 
