@@ -36,16 +36,15 @@ class edicao_video_utils_test(unittest.TestCase):
         self.assertEqual(str(type(self.ev.size_segmentation())),"<class 'numpy.ndarray'>")
 
     def test_return_calcula_energia_media(self):
-        self.assertEqual(str(type(self.ev.calculo_energia_media())), "<class 'numpy.ndarray'>")
+        self.assertEqual(str(type(self.ev.mean_energy_calculation())), "<class 'numpy.ndarray'>")
 
     def test_type_return_sub_max(self):
-        self.ev.calculo_energia_media = MagicMock(return_value = np.array([216, 237, 238, 239, 240, 241, 337, 338, 339, 340, 341, 342, 343, 344, 348, 376, 377, 378, 379, 380, 381, 382, 437, 438, 439, 440, 441, 442, 520, 521, 522, 523, 524, 546, 601, 602, 603, 604, 605, 606, 607, 608, 654, 667, 668, 669, 670, 671, 672, 673, 674, 695, 696, 697, 698, 699, 700, 701, 702, 703]))
         self.assertEqual(str(type(self.ev.subseq_max())), "<class 'list'>")
 
     def test_called_once_calculo_energia_media(self):
-        self.ev.calculo_energia_media = MagicMock(return_value = np.array([216, 237, 238, 239, 240, 241, 337, 338, 339, 340, 341, 342, 343, 344, 348, 376, 377, 378, 379, 380, 381, 382, 437, 438, 439, 440, 441, 442, 520, 521, 522, 523, 524, 546, 601, 602, 603, 604, 605, 606, 607, 608, 654, 667, 668, 669, 670, 671, 672, 673, 674, 695, 696, 697, 698, 699, 700, 701, 702, 703]))
+        self.ev.mean_energy_calculation = MagicMock(return_value = np.array([216, 237, 238, 239, 240, 241, 337, 338, 339, 340, 341, 342, 343, 344, 348, 376, 377, 378, 379, 380, 381, 382, 437, 438, 439, 440, 441, 442, 520, 521, 522, 523, 524, 546, 601, 602, 603, 604, 605, 606, 607, 608, 654, 667, 668, 669, 670, 671, 672, 673, 674, 695, 696, 697, 698, 699, 700, 701, 702, 703]))
         self.ev.subseq_max()
-        self.ev.calculo_energia_media.assert_called_once_with()
+        self.ev.mean_energy_calculation.assert_called_once_with()
 
     def test_create_file_edita_video(self):
         self.ev.extract_audio_features()
@@ -65,9 +64,5 @@ class edicao_video_utils_test(unittest.TestCase):
 
     def test_return_threshold_calculo_energia_media(self):
         ev = EdicaoVideo(self.videoTestResourcesPath, self.testResourcesPath)
-        ev.calculo_energia_media()
+        ev.mean_energy_calculation()
         self.assertEqual(ev.thres,0.0004068760747267377)
-
-
-
-

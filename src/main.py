@@ -1,5 +1,3 @@
-from src.utils.edicao_video_utils import EdicaoVideo
-import os
 from src.view.interfaceV4 import *
 
 # Calls ui
